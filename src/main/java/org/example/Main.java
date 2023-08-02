@@ -7,7 +7,11 @@ public class Main {
     public static void main(String[] args) {
         // creates object of type  hero
        Hero hero = new Archer("Justine");
+       hero.displayHero();
+
         System.out.println(hero);
+
+
 
 
 

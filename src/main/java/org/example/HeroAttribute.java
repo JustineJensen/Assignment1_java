@@ -25,7 +25,8 @@ public  class HeroAttribute {
 
     @Override
     public String toString() {
-        return "HeroAttribute{" + ", strength=" + strength + ", dexterity=" + dexterity +
-                ", intelligence=" + intelligence + '}';
+        return "Attribute" + ", strength=" + strength +
+                ", dexterity=" + dexterity +
+                ", intelligence=" + intelligence ;
     }
 }
