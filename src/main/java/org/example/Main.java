@@ -1,9 +1,17 @@
 package org.example;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import org.example.Hero.Archer;
+import org.example.Hero.Barbarian;
+import org.example.Hero.Hero;
 public class Main {
     public static void main(String[] args) {
+        // creates object of type  hero
+       Hero hero = new Archer("Justine");
+        System.out.println(hero);
+
+
+
+
 
     }
 }
