@@ -2,7 +2,7 @@ package org.example.Equipmements;
 
 import org.example.Hero.Hero;
 
-public class  Item {
+public abstract class  Item {
     private String name;
     private int requiredLevel;
     private int slot;
@@ -13,10 +13,40 @@ public class  Item {
         this.requiredLevel = requiredLevel;
         this.slot = slot;
     }
-    /*public void requiredLevel(int requiredLevel){
-        if(hero < requiredLevel){
-            System.out.println( "You cannot equit item");
+
+    public String getName() {
+        return name;
+    }
+
+    public int getRequiredLevel() {
+        return requiredLevel;
+    }
+
+    public int getSlot() {
+        return slot;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "name='" + name + '\'' +
+                ", requiredLevel=" + requiredLevel +
+                ", slot=" + slot +
+                '}';
+    }
+    public boolean equip(int heroLevel){
+        if(heroLevel >= requiredLevel){
+            return false;
         }
-        */
+        return true;
+    }
+
+    // method to add two instances
+    public int totalAttributes(int a, int b){
+        int total = a + b;
+        return total;
+    }
+
+
     }
 

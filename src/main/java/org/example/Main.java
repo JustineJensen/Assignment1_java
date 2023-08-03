@@ -1,15 +1,26 @@
 package org.example;
 
-import org.example.Hero.Archer;
-import org.example.Hero.Barbarian;
-import org.example.Hero.Hero;
+import org.example.Equipmements.*;
+import org.example.Hero.*;
+
 public class Main {
     public static void main(String[] args) {
         // creates object of type  hero
-       Hero hero = new Archer("Justine");
-       hero.displayHero();
+        Hero wizard = new Wizard("Wizard");
+        Hero archer = new Archer("Wizard");
+        Hero swashbuckler = new SwashBuckler("Jack");
+        Hero barbarian = new Barbarian("Conan");
 
-        System.out.println(hero);
+        wizard.displayHero();
+        System.out.println();
+        wizard.levelUp();
+        System.out.println(wizard);
+
+        HeroAttribute wiz = new HeroAttribute(1,1,8);
+        System.out.println(wiz);
+
+
+
 
 
 
