@@ -24,17 +24,9 @@ public class Barbarian extends Hero {
 
     @Override
     public void levelUpAttributes() {
-        levelAttributes.increaseLevelUp(3);
-        levelAttributes.increaseLevelUp(2);
-        levelAttributes.increaseLevelUp(1);
+        levelAttributes.add(new HeroAttribute(3,2,1));
     }
 
     }
 
-   /* @Override
-    public String toString() {
-        return "Barbarian{" +
-                "level=" + getLevel()+"\t" + "name=" + getName() +"\t" + "levelAttributes=" + levelAttributes +
-                '}';
-    }*/
 

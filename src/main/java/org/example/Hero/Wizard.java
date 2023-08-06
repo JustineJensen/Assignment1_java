@@ -18,16 +18,6 @@ public class Wizard extends Hero {
 
     @Override
     protected void levelUpAttributes() {
-        levelAttributes.increaseLevelUp(1);
-        levelAttributes.increaseLevelUp(1);
-        levelAttributes.increaseLevelUp(5);
-
+        levelAttributes.add(new HeroAttribute(1,1,5));
     }
-
-    /*@Override
-    public String toString() {
-        return "Wizard{" +
-                "level=" + level + "name=" + getName() + "levelAttributes=" + levelAttributes +
-                '}';
-    }*/
 }

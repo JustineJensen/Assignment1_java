@@ -73,14 +73,5 @@ public  class HeroAttribute {
     public Map<String, Item> getEquippedItems() {
         return equippedItems;
     }
-    /*@Override
-    public String toString() {
-        return "HeroAttribute" + ", strength=" + strength +
-                ", dexterity=" + dexterity +
-                ", intelligence=" + intelligence ;
-    }
-*/
-
-
 
 }

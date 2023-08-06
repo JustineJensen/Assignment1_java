@@ -22,20 +22,10 @@ public class SwashBuckler extends Hero {
 
     @Override
     protected void levelUpAttributes() {
-        levelAttributes.increaseLevelUp(1);
-        levelAttributes.increaseLevelUp(4);
-        levelAttributes.increaseLevelUp(1);
+        levelAttributes.add(new HeroAttribute(1,4,1));
     }
-
 
 }
 
-
-   /* @Override
-    public String toString() {
-        return "SwashBuckler{" +
-                "level=" + level + "name=" + getName() + "levelAttributes=" + levelAttributes +
-                '}';
-    }*/
 
 

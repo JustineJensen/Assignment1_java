@@ -17,8 +17,8 @@ public abstract class Hero {
     protected HeroAttribute levelAttributes;
     private HeroAttribute totalAttributes;
     private int level = 1;
-    private List<String> validWeaponType;
-    private List<String> validArmorType;
+    private List<WeaponType> validWeaponType;
+    private List<ArmorType> validArmorType;
     private Map<Slot, Item> equipmentItem;
     private WeaponType weaponType;
     private int damagingAttributes;
@@ -51,11 +51,10 @@ public abstract class Hero {
         this.levelAttributes = levelAttributes;
     }
 
-    protected abstract void levelUpAttributes();
-
     public String getName() {
         return name;
     }
+
 
     public void setName(String name) {
         this.name = name;
@@ -69,34 +68,50 @@ public abstract class Hero {
         return weaponType;
     }
 
-    public void levelUp() {
-        this.level++;
-        levelAttributes.add(getTotalAttributes());
+    public List<WeaponType> getValidWeaponType() {
+        return validWeaponType;
     }
 
-    public void equipArmor(Item armor) {
-        if (validArmorType.contains(armor.getType())) {
-            equipmentItem.put(Slot.Body, armor);
+    public void setArmorType(ArmorType armorType) {
+        this.armorType = armorType;
+    }
+
+
+    public void levelUp() {
+        this.level++;
+        levelUpAttributes();
+    }
+    protected abstract void levelUpAttributes();
+
+    public void equipArmor(Item item) {
+        if (validArmorType.contains(item.getItemType())) {
+            equipmentItem.put(Slot.Body, item);
+            isWeaponEquipped = true;
         } else {
             System.out.println("invalid armor");
         }
     }
 
     /**
-     * equip the weapon
-     *
-     * @param weapon
+     * This method equips an item "weapon"
+     * @param item
      */
-    public void equipWeapon(Slot weapon) {
-        if (validWeaponType.contains(weapon.name())) {
+    public void equipWeapon(Item item) {
+        if (validWeaponType.contains(item.getItemType())) {
             // equip the weapon
-            equipmentItem.put(Slot.Weapon, null);
+            equipmentItem.put(Slot.Weapon, item);
+            isWeaponEquipped =true;
         } else {
             System.out.println("Invalid weapon");
         }
     }
+
+    /**
+     * Checks if there is an item in the equipmmnet map
+     * @return null item if there is no weapon else returns true
+     */
     protected boolean hasWeaponEquipped() {
-        return isWeaponEquipped;
+        return  equipmentItem.get(Slot.Weapon)!= null;
     }
     protected int getDamagingAttributes() {
         return damagingAttributes;
@@ -112,9 +127,9 @@ public abstract class Hero {
         int damagingAttributes =0;
 
         if(this instanceof Barbarian) {
-            damagingAttributes = getTotalAttributes().getStrength();
+            damagingAttributes = getTotalAttributes().getDexterity();
         }else if(this instanceof Wizard) {
-            damagingAttributes = getTotalAttributes().getStrength();
+            damagingAttributes = getTotalAttributes().getDexterity();
         }else if(this instanceof  Archer || this instanceof  SwashBuckler ){
             damagingAttributes = getTotalAttributes().getDexterity();
 
@@ -128,7 +143,7 @@ public abstract class Hero {
      * @return total attributes
      */
     public HeroAttribute getTotalAttributes() {
-        HeroAttribute totalAttributes = levelAttributes;
+        HeroAttribute totalAttributes = new HeroAttribute(levelAttributes.getStrength(), levelAttributes.getDexterity(), levelAttributes.getIntelligence());
         for (Item item : equipmentItem.values()) {
             if (item instanceof Armor) {
                 Armor armor = (Armor) item;

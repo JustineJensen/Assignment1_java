@@ -1,51 +1,27 @@
 package org.example;
 
+import org.example.Equipments.Item;
+import org.example.Equipments.Slot;
+import org.example.Equipments.Weapon;
+import org.example.Equipments.WeaponType;
 import org.example.Hero.*;
+
+import static org.example.Equipments.Slot.Weapon;
 
 public class Main {
     public static void main(String[] args) {
-        // creates object of type  hero
 
-        Hero archer = new Archer("Archer");
-        archer.displayHero();
-        System.out.println();
-        archer.levelUp();
-        System.out.println(archer);
-        archer.getTotalAttributes();
-        System.out.println(archer);
+        Hero archer1 = new Archer("Archer1");
+        Hero archer2 = new Archer("Archer2");
 
+        archer1.levelUp();
+        archer2.levelUp();
 
-
-
-        /*Hero swashbuckler = new SwashBuckler("swashbuckler");
-        swashbuckler.displayHero();
-        System.out.println();
-        swashbuckler.levelUp();
-        System.out.println(swashbuckler);
+        archer1.displayHero();
+        System.out.println("************************");
+        archer1.displayHero();
 
 
-        Hero barbarian = new Barbarian("Barbarian");
-        barbarian.displayHero();
-        System.out.println();
-        barbarian.levelUp();
-        System.out.println(barbarian);
-
-        Hero wizard = new Wizard("Wizard");
-        wizard.displayHero();
-        System.out.println();
-        wizard.levelUp();
-        System.out.println(wizard);*/
-
-        //adding two instances
-
-        HeroAttribute ach = new HeroAttribute(1,1,8);
-        HeroAttribute wizard = new HeroAttribute(5,7,12);
-
-        HeroAttribute result = ach.addInstances(ach,wizard);
-        System.out.println(result);
-        System.out.println("Strength:" + result.getStrength());
-        System.out.println("Dexternity:" + result.getDexterity());
-        System.out.println("Intelligence:" + result.getIntelligence());
 
 
 

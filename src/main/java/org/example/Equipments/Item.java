@@ -7,14 +7,14 @@ public abstract class  Item {
     private int requiredLevel;
     private int weaponDamage;
     private Slot slot;
-    private Hero hero;
-    private String type;
+    private String itemType;
 
-    public Item(String name, int requiredLevel, int slot) {
+    public Item(String name, int requiredLevel, Slot slot) {
         this.name = name;
         this.requiredLevel = requiredLevel;
-        this.type = type;
+        this.itemType = itemType;
         this.weaponDamage = getWeaponDamage();
+        this.slot = slot;
 
     }
 
@@ -29,8 +29,8 @@ public abstract class  Item {
     public Slot getSlot() {
         return slot;
     }
-    public String getType() {
-        return type;
+    public String getItemType() {
+        return itemType;
     }
     public int getWeaponDamage() {
         return weaponDamage;
@@ -38,6 +38,7 @@ public abstract class  Item {
     public void setWeaponDamage(int weaponDamage){
         this.weaponDamage = weaponDamage;
     }
+    public abstract  int calculateTotalAttributes();
 
     @Override
     public String toString() {
@@ -48,10 +49,7 @@ public abstract class  Item {
                 '}';
     }
 
-    public int equip(int heroLevel) {
-        System.out.println(heroLevel >= requiredLevel ? "You can not equip the item" : "Item equipped");
-     return heroLevel;
-    }
+
 
 
 
