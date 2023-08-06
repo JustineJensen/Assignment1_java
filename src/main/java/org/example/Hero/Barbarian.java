@@ -1,26 +1,40 @@
 package org.example.Hero;
 
+import org.example.Equipments.Item;
+import org.example.Equipments.Slot;
+
 public class Barbarian extends Hero {
     public Barbarian(String name) {
         super(name);
-        this.levelAttributes = new HeroAttribute(5,2,1 );
+        this.levelAttributes = new HeroAttribute(5, 2, 1);
+    }
+
+    public void levelUp() {
+        this.setLevelUp(getLevel() + 1);
+    }
+
+
+    public String getName() {
+        return super.getName();
+    }
+
+    public int getLevel() {
+        return super.getLevel();
     }
 
     @Override
     public void levelUpAttributes() {
-        levelAttributes.increaselevelUp(3);
-        levelAttributes.increaselevelUp(2);
-        levelAttributes.increaselevelUp(1);
+        levelAttributes.increaseLevelUp(3);
+        levelAttributes.increaseLevelUp(2);
+        levelAttributes.increaseLevelUp(1);
     }
 
-    public int calculateDamage(){
-        return 0;
     }
 
-    @Override
+   /* @Override
     public String toString() {
         return "Barbarian{" +
-                "level=" + getLevel()+"\t" +  levelAttributes +
+                "level=" + getLevel()+"\t" + "name=" + getName() +"\t" + "levelAttributes=" + levelAttributes +
                 '}';
-    }
-}
+    }*/
+

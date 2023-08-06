@@ -1,6 +1,5 @@
 package org.example.Hero;
-import org.example.Equipmements.Item;
-import org.example.Hero.Hero;
+import org.example.Equipments.Item;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,13 +39,25 @@ public  class HeroAttribute {
     public void setIntelligence(int intelligence) {
         this.intelligence = intelligence;
     }
-
-    public void  addAttributes(HeroAttribute instance){
-        this.strength += instance.strength;
-        this.dexterity += instance.dexterity;
-        this.intelligence += instance.intelligence;
+    public void add(HeroAttribute other) {
+        this.strength += other.strength;
+        this.dexterity += other.dexterity;
+        this.intelligence += other.intelligence;
     }
-    public void increaselevelUp(int rate) {
+
+    /**
+     *
+     * @param a
+     * @param b
+     * @return sum of instances by specified amount
+     */
+    public HeroAttribute addInstances(HeroAttribute a, HeroAttribute b){
+        int sumStrength = a.strength + b.strength;
+        int sumIntelligence = a.intelligence + b.intelligence;
+        int sumDexterity = a.dexterity + b.dexterity;
+        return  new HeroAttribute(sumStrength,sumDexterity,sumIntelligence);
+    }
+    public void increaseLevelUp(int rate) {
         this.strength += rate;
         this.dexterity += rate;
         this.intelligence += rate;
@@ -62,13 +73,13 @@ public  class HeroAttribute {
     public Map<String, Item> getEquippedItems() {
         return equippedItems;
     }
-    @Override
+    /*@Override
     public String toString() {
         return "HeroAttribute" + ", strength=" + strength +
                 ", dexterity=" + dexterity +
                 ", intelligence=" + intelligence ;
     }
-
+*/
 
 
 

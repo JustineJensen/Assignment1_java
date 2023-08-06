@@ -6,17 +6,28 @@ public class Wizard extends Hero {
         super(name);
         this.levelAttributes = new HeroAttribute(1,1,8);
     }
+    public String getName(){
+        return super.getName();
+    }
+    public int getLevel(){
+        return super.getLevel();
+    }
+    public void levelUp(){
+        this.setLevelUp(getLevel()+1);
+    }
 
     @Override
     protected void levelUpAttributes() {
-        levelAttributes.increaselevelUp(1);
-        levelAttributes.increaselevelUp(1);
-        levelAttributes.increaselevelUp(5);
+        levelAttributes.increaseLevelUp(1);
+        levelAttributes.increaseLevelUp(1);
+        levelAttributes.increaseLevelUp(5);
 
     }
-    @Override
-    public int calculateDamage() {
-        return 0;
-    }
 
+    /*@Override
+    public String toString() {
+        return "Wizard{" +
+                "level=" + level + "name=" + getName() + "levelAttributes=" + levelAttributes +
+                '}';
+    }*/
 }

@@ -8,20 +8,27 @@ public class Archer extends Hero {
     }
     @Override
     public void levelUpAttributes() {
-        levelAttributes.increaselevelUp(1);
-        levelAttributes.increaselevelUp(5);
-        levelAttributes.increaselevelUp(1);
+        levelAttributes.increaseLevelUp(1);
+        levelAttributes.increaseLevelUp(5);
+        levelAttributes.increaseLevelUp(1);
+    }
+    public String getName(){
+        return super.getName();
+    }
+    public int getLevel(){
+        return super.getLevel();
+    }
+
+    public void levelUp(){
+        this.setLevelUp(getLevel()+1);
     }
 
 
-    @Override
-    public void levelUp() {
-        level ++;
 
-    }
-    @Override
-    public int calculateDamage() {
-
-        return 0;
-    }
+    /*@Override
+    public String toString() {
+        return "Archer{" +
+                "level=" + level + "name=" + getName() + "levelAttributes=" + levelAttributes +
+                '}';
+    }*/
 }

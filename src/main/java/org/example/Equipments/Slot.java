@@ -1,4 +1,4 @@
-package org.example.Equipmements;
+package org.example.Equipments;
 
 public enum Slot {
     Weapon,

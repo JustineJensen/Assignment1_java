@@ -1,40 +1,48 @@
 package org.example.Hero;
 
+import org.example.Equipments.Armor;
+import org.example.Equipments.Item;
+import org.example.Equipments.Slot;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import org.example.Equipments.ArmorType;
+import org.example.Equipments.WeaponType;
 
 public abstract class Hero {
     private String name;
+    private ArmorType armorType;
     protected HeroAttribute levelAttributes;
-    private int level =1;
+    private HeroAttribute totalAttributes;
+    private int level = 1;
     private List<String> validWeaponType;
     private List<String> validArmorType;
-    private  List<String>equipment;
+    private Map<Slot, Item> equipmentItem;
+    private WeaponType weaponType;
+    private int damagingAttributes;
+    protected boolean isWeaponEquipped;
 
     public Hero(String name) {
         this.name = name;
-        this.levelAttributes = new HeroAttribute(1,1,8);
-        this.validWeaponType =new ArrayList<>();
+
+        this.levelAttributes = new HeroAttribute(0, 0, 0);
+        this.validWeaponType = new ArrayList<>();
         this.validArmorType = new ArrayList<>();
-        this.equipment = new ArrayList<>();
-        levelUpAttributes();
-       /* for(Slot.slot:slot.value(){
-            equipment.put(slot,value:null);
-        }*/
+        this.equipmentItem = new HashMap<>();
+        this.totalAttributes = new HeroAttribute(0,0,0);
+        this.damagingAttributes = getDamagingAttributes();
+
+        for (Slot slot : Slot.values()) {
+            equipmentItem.put(slot, null); // put the slot in the equipmnet value
+        }
     }
-    public void equipArmor(String armor){
-        System.out.println(validArmorType.contains(armor)? equipment.add(armor):"Invalid armor");
-    }
-    public void equipWeapon(String weapon){
-        System.out.println(validWeaponType.contains(weapon)?
-                equipment.add(weapon):"Invalid weapon");
-    }
-    public HeroAttribute getLevelAttributes() {
-        return levelAttributes;
-    }
+
     public int getLevel() {
         return level;
     }
+
     public void setLevelUp(int level) {
         this.level = level;
     }
@@ -48,20 +56,112 @@ public abstract class Hero {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
-    public void levelUp(){
-        level ++;
+
+    public ArmorType getArmorType() {
+        return armorType;
     }
-    public abstract  int calculateDamage();
+
+    public WeaponType getWeaponType() {
+        return weaponType;
+    }
+
+    public void levelUp() {
+        this.level++;
+        levelAttributes.add(getTotalAttributes());
+    }
+
+    public void equipArmor(Item armor) {
+        if (validArmorType.contains(armor.getType())) {
+            equipmentItem.put(Slot.Body, armor);
+        } else {
+            System.out.println("invalid armor");
+        }
+    }
+
+    /**
+     * equip the weapon
+     *
+     * @param weapon
+     */
+    public void equipWeapon(Slot weapon) {
+        if (validWeaponType.contains(weapon.name())) {
+            // equip the weapon
+            equipmentItem.put(Slot.Weapon, null);
+        } else {
+            System.out.println("Invalid weapon");
+        }
+    }
+    protected boolean hasWeaponEquipped() {
+        return isWeaponEquipped;
+    }
+    protected int getDamagingAttributes() {
+        return damagingAttributes;
+    }
+
+    public  int calculateDamage(){
+        int weaponDamage =0;
+        Item weapon = equipmentItem.get(Slot.Weapon);
+        if(weapon != null){
+            weaponDamage = weapon.getWeaponDamage();
+        }
+        //calculate  damaging attributes based on hero
+        int damagingAttributes =0;
+
+        if(this instanceof Barbarian) {
+            damagingAttributes = getTotalAttributes().getStrength();
+        }else if(this instanceof Wizard) {
+            damagingAttributes = getTotalAttributes().getStrength();
+        }else if(this instanceof  Archer || this instanceof  SwashBuckler ){
+            damagingAttributes = getTotalAttributes().getDexterity();
 
 
-    public void displayHero(){
-        System.out.println("Hero name:" +" " + name + "\n" +
-                "Leve: " + level + "\n"+ "Total strength:"
-                + getLevelAttributes().getStrength() + "\n"  +"Total dexterity:" + getLevelAttributes().getDexterity() + "\n"  +"Damage"
-                + "\n" + "Total intelligence:" + getLevelAttributes().getIntelligence());
+        }
+        int heroDamage = weaponDamage* (1+ damagingAttributes / 100);
+        return  heroDamage;
     }
+
+    /**
+     * @return total attributes
+     */
+    public HeroAttribute getTotalAttributes() {
+        HeroAttribute totalAttributes = levelAttributes;
+        for (Item item : equipmentItem.values()) {
+            if (item instanceof Armor) {
+                Armor armor = (Armor) item;
+                int armorAttributes = armor.getArmorAttributes();
+                totalAttributes.add(new HeroAttribute(armorAttributes, armorAttributes, armorAttributes));
+            }
+        }
+        return totalAttributes;
+    }
+
+    public void displayHero() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Hello name : ");
+        stringBuilder.append(name);
+        stringBuilder.append("\n");
+        stringBuilder.append("Level :");
+        stringBuilder.append(level);
+        stringBuilder.append("\n");
+        stringBuilder.append("Total strength :");
+        stringBuilder.append(getTotalAttributes().getStrength());
+        stringBuilder.append("\n");
+        stringBuilder.append("Total dexterity :");
+        stringBuilder.append(getTotalAttributes().getDexterity());
+        stringBuilder.append("\n");
+        stringBuilder.append("Total intelligence :");
+        stringBuilder.append(getTotalAttributes().getIntelligence());
+        stringBuilder.append("\n");
+        stringBuilder.append("Damage :");
+        stringBuilder.append(calculateDamage());
+        System.out.println(stringBuilder.toString());
+
+    }
+
+
 
 }

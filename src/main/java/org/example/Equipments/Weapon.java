@@ -1,6 +1,4 @@
-package org.example.Equipmements;
-import org.example.Equipmements.WeaponType;
-import org.example.Equipmements.Slot;
+package org.example.Equipments;
 
 public class    Weapon extends Item {
     private WeaponType weaponType;

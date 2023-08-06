@@ -1,17 +1,21 @@
-package org.example.Equipmements;
+package org.example.Equipments;
 
 import org.example.Hero.Hero;
 
 public abstract class  Item {
     private String name;
     private int requiredLevel;
-    private int slot;
+    private int weaponDamage;
+    private Slot slot;
     private Hero hero;
+    private String type;
 
     public Item(String name, int requiredLevel, int slot) {
         this.name = name;
         this.requiredLevel = requiredLevel;
-        this.slot = slot;
+        this.type = type;
+        this.weaponDamage = getWeaponDamage();
+
     }
 
     public String getName() {
@@ -22,8 +26,17 @@ public abstract class  Item {
         return requiredLevel;
     }
 
-    public int getSlot() {
+    public Slot getSlot() {
         return slot;
+    }
+    public String getType() {
+        return type;
+    }
+    public int getWeaponDamage() {
+        return weaponDamage;
+    }
+    public void setWeaponDamage(int weaponDamage){
+        this.weaponDamage = weaponDamage;
     }
 
     @Override
@@ -34,19 +47,13 @@ public abstract class  Item {
                 ", slot=" + slot +
                 '}';
     }
-    public boolean equip(int heroLevel){
-        if(heroLevel >= requiredLevel){
-            return false;
-        }
-        return true;
-    }
 
-    // method to add two instances
-    public int totalAttributes(int a, int b){
-        int total = a + b;
-        return total;
+    public int equip(int heroLevel) {
+        System.out.println(heroLevel >= requiredLevel ? "You can not equip the item" : "Item equipped");
+     return heroLevel;
     }
 
 
-    }
+
+}
 
