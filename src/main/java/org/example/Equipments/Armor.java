@@ -3,18 +3,21 @@ package org.example.Equipments;
 public class Armor extends Item {
     private ArmorType armorType;
     private int armorAttributes;
-    public Armor(String name, int requiredLevel, Slot slot, int armorAttributes) {
+
+    public Armor(String name, int requiredLevel, Slot slot, int weaponDamage,ArmorType armorType) {
         super(name, requiredLevel, slot);
         this.armorAttributes = armorAttributes;
+        this.armorType =armorType;
     }
+
+    /*public Armor(String name, int requiredLevel, Slot slot, int armorAttributes) {
+        super(name, requiredLevel, slot);
+        this.armorAttributes = armorAttributes;
+    }*/
 
     @Override
     public String getName() {
         return super.getName();
-    }
-    @Override
-    public String getItemType() {
-        return super.getItemType();
     }
 
     @Override
@@ -38,10 +41,6 @@ public class Armor extends Item {
        this.armorAttributes= armorAttributes;
     }
 
-    @Override
-    public int calculateTotalAttributes() {
-        return getArmorAttributes();
-    }
 
 
 }

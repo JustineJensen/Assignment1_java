@@ -1,15 +1,11 @@
 package org.example.Hero;
 
-import org.example.Equipments.Armor;
-import org.example.Equipments.Item;
-import org.example.Equipments.Slot;
+import org.example.Equipments.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.example.Equipments.ArmorType;
-import org.example.Equipments.WeaponType;
 
 public abstract class Hero {
     private String name;
@@ -83,9 +79,9 @@ public abstract class Hero {
     }
     protected abstract void levelUpAttributes();
 
-    public void equipArmor(Item item) {
-        if (validArmorType.contains(item.getItemType())) {
-            equipmentItem.put(Slot.Body, item);
+    public void equipArmor(Armor armor) {
+        if (validArmorType.contains(armor.getArmorType())) {
+            equipmentItem.put(armor.getSlot(), armor);
             isWeaponEquipped = true;
         } else {
             System.out.println("invalid armor");
@@ -96,10 +92,10 @@ public abstract class Hero {
      * This method equips an item "weapon"
      * @param item
      */
-    public void equipWeapon(Item item) {
-        if (validWeaponType.contains(item.getItemType())) {
+    public void equipWeapon(Weapon weapon) {
+        if (validWeaponType.contains(weapon.getWeaponType())) {
             // equip the weapon
-            equipmentItem.put(Slot.Weapon, item);
+            equipmentItem.put(Slot.Weapon, weapon);
             isWeaponEquipped =true;
         } else {
             System.out.println("Invalid weapon");
@@ -119,7 +115,7 @@ public abstract class Hero {
 
     public  int calculateDamage(){
         int weaponDamage =0;
-        Item weapon = equipmentItem.get(Slot.Weapon);
+        Weapon weapon = (Weapon) equipmentItem.get(Slot.Weapon);
         if(weapon != null){
             weaponDamage = weapon.getWeaponDamage();
         }

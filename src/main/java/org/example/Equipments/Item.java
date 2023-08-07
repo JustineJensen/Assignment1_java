@@ -5,15 +5,11 @@ import org.example.Hero.Hero;
 public abstract class  Item {
     private String name;
     private int requiredLevel;
-    private int weaponDamage;
     private Slot slot;
-    private String itemType;
 
     public Item(String name, int requiredLevel, Slot slot) {
         this.name = name;
         this.requiredLevel = requiredLevel;
-        this.itemType = itemType;
-        this.weaponDamage = getWeaponDamage();
         this.slot = slot;
 
     }
@@ -29,16 +25,9 @@ public abstract class  Item {
     public Slot getSlot() {
         return slot;
     }
-    public String getItemType() {
-        return itemType;
+    public void setSlot(Slot slot) {
+        this.slot = slot;
     }
-    public int getWeaponDamage() {
-        return weaponDamage;
-    }
-    public void setWeaponDamage(int weaponDamage){
-        this.weaponDamage = weaponDamage;
-    }
-    public abstract  int calculateTotalAttributes();
 
     @Override
     public String toString() {
