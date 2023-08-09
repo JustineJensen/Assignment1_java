@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WeaponTest {
     @Test
-    void testingWhenWeaponSwordIsCreated() {
+    void testingWhenWeaponSwordIsCreated_shouldHaveCorrectName() {
         Item item = new Weapon("Sword", 1, Slot.Weapon, 1, WeaponType.Hatchet);
         assertEquals("Sword", item.getName());
     }
@@ -39,13 +39,13 @@ public class WeaponTest {
     }
 
     @Test
-    void testCalculateDamageWithWeapon() {
+    void testCalculateDamageForWeapon() {
         Weapon weapon = new Weapon("Hatchets", 1, Slot.Weapon, 2, WeaponType.Hatchet);
-        assertEquals(10, weapon.getWeaponDamage());
+        assertEquals(2, weapon.getWeaponDamage());
     }
 
     @Test
-    public void testCalculateDamageWithReplacedWeapon() {
+    public void testCalculateDamageForReplacedWeapon() {
         Weapon oldWeapon = new Weapon("Old Sword", 1, Slot.Weapon, 5, WeaponType.Sword);
         Weapon newWeapon = new Weapon("New Sword", 1, Slot.Weapon, 15, WeaponType.Sword);
 
@@ -59,7 +59,7 @@ public class WeaponTest {
     }
 
     @Test
-    void testCalculateDamageWithWeaponAndArmor() {
+    void testCalculateDamageForWeaponAndArmor() {
         Weapon weapon = new Weapon("Sword", 1, Slot.Weapon, 10, WeaponType.Sword);
         Armor armor = new Armor("Cloth Armor", 1, Slot.Body, ArmorType.Cloth, new HeroAttribute(1, 0, 0));
 

@@ -27,6 +27,76 @@ public class Barbariantest {
         assertEquals(null,barbarian.getArmorType());
     }
     @Test
+    void testLevelUpAttributesBarbarianForStrength_ShouldReturnCollectLevel() {
+        Barbarian barbarian = new Barbarian("Barbarian");
+        HeroAttribute initialAttributes = barbarian .getTotalAttributes();
+        barbarian.levelUp();
+        assertEquals(2, barbarian .getLevel());
+        assertEquals(5, initialAttributes.getStrength());
+    }
+    @Test
+    void testLevelUpAttributesBarbarianForDexterity_ShouldReturnCollectLevel() {
+        Barbarian barbarian = new Barbarian("Barbarian");
+        HeroAttribute initialAttributes = barbarian .getTotalAttributes();
+        barbarian.levelUp();
+        assertEquals(2, barbarian .getLevel());
+        assertEquals(2, initialAttributes.getDexterity());
+
+    }
+    @Test
+    void testLevelUpAttributesBarbarianForIntelligence_ShouldReturnCollectLevel() {
+        Barbarian barbarian = new Barbarian("Barbarian");
+        HeroAttribute initialAttributes = barbarian .getTotalAttributes();
+        barbarian.levelUp();
+        assertEquals(2, barbarian .getLevel());
+        assertEquals(1, initialAttributes.getIntelligence());
+
+    }
+
+    @Test
+    void testBarbarianShouldHaveCorrectAttributesForStrength_returnCollectAttributes(){
+        Barbarian barbarian = new Barbarian("Barbarian");
+        HeroAttribute actualAttributes = barbarian.getTotalAttributes();
+        assertEquals(5, actualAttributes.getStrength());
+
+    }
+    @Test
+    void testBarbarianShouldHaveCorrectAttributesForDexterity_returnCollectAttributes(){
+        Barbarian barbarian = new Barbarian("Barbarian");
+        HeroAttribute actualAttributes = barbarian.getTotalAttributes();
+        assertEquals(2, actualAttributes.getDexterity());
+    }
+    @Test
+    void testBarbarianShouldHaveCorrectAttributesForIntelligence_returnCollectAttributes(){
+        Barbarian barbarian = new Barbarian("Barbarian");
+        HeroAttribute actualAttributes = barbarian.getTotalAttributes();
+        assertEquals(1, actualAttributes.getIntelligence());
+
+    }
+    @Test
+    void testHeroAttributesAfterLevelUpForStrength(){
+        Barbarian barbarian = new Barbarian("Barbarian");
+        barbarian.levelUp();
+        HeroAttribute actualAttributes = barbarian.getTotalAttributes();
+        assertEquals(8, actualAttributes.getStrength());
+
+    }
+    @Test
+    void testHeroAttributesAfterLevelUpForIntelligence(){
+        Barbarian barbarian = new Barbarian("Barbarian");
+        barbarian.levelUp();
+        HeroAttribute actualAttributes = barbarian.getTotalAttributes();
+        assertEquals(2, actualAttributes.getIntelligence());
+    }
+    @Test
+    void testHeroAttributesAfterLevelUpForDexterity(){
+        Barbarian barbarian = new Barbarian("Barbarian");
+        barbarian.levelUp();
+        HeroAttribute actualAttributes = barbarian.getTotalAttributes();
+        assertEquals(4, actualAttributes.getDexterity());
+    }
+
+    @Test
     void testTotalAttributesWithOnePieceArmor_shouldReturnCorrectArmor()  {
        Barbarian barbarian= new Barbarian("Barbarian");
         int expectedStrength = 5;
