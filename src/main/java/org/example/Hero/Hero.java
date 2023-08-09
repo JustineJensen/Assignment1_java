@@ -1,6 +1,8 @@
 package org.example.Hero;
 
 import org.example.Equipments.*;
+import org.example.Exeception.InvalidArmorException;
+import org.example.Exeception.InvalidWeaponException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,10 +33,13 @@ public abstract class Hero {
         this.damagingAttributes = getDamagingAttributes();
 
         for (Slot slot : Slot.values()) {
-            equipmentItem.put(slot, null); // put the slot in the equipmnet value
+            equipmentItem.put(slot, null);
         }
     }
-
+    public void levelUp() {
+        this.level++;
+       levelUpAttributes();
+    }
     public int getLevel() {
         return level;
     }
@@ -47,10 +52,12 @@ public abstract class Hero {
         this.levelAttributes = levelAttributes;
     }
 
+    public HeroAttribute getLevelAttributes() {
+        return levelAttributes;
+    }
     public String getName() {
         return name;
     }
-
 
     public void setName(String name) {
         this.name = name;
@@ -68,42 +75,61 @@ public abstract class Hero {
         return validWeaponType;
     }
 
+    public void setValidWeaponType(List<WeaponType> validWeaponType) {
+        this.validWeaponType = validWeaponType;
+    }
+
     public void setArmorType(ArmorType armorType) {
         this.armorType = armorType;
     }
 
-
-    public void levelUp() {
-        this.level++;
-        levelUpAttributes();
+    public List<ArmorType> getValidArmorType() {
+        return validArmorType;
     }
+
     protected abstract void levelUpAttributes();
 
-    public void equipArmor(Armor armor) {
-        if (validArmorType.contains(armor.getArmorType())) {
-            equipmentItem.put(armor.getSlot(), armor);
-            isWeaponEquipped = true;
-        } else {
-            System.out.println("invalid armor");
-        }
-    }
-
     /**
-     * This method equips an item "weapon"
-     * @param item
+     * This method checks if validArmor type collection contains a valid armor, add to the equipment map
+     * @param armor
+     * @throws InvalidArmorException
      */
-    public void equipWeapon(Weapon weapon) {
-        if (validWeaponType.contains(weapon.getWeaponType())) {
-            // equip the weapon
-            equipmentItem.put(Slot.Weapon, weapon);
-            isWeaponEquipped =true;
-        } else {
-            System.out.println("Invalid weapon");
+
+
+    public void equipArmor(Armor armor) {
+        try {
+            if (validArmorType.contains(armor.getArmorType())) {
+                equipmentItem.put(armor.getSlot(), armor);
+                isWeaponEquipped = true;
+            } else {
+                throw new InvalidArmorException("Invalid armortype" + " "+ armor.getArmorType());
+            }
+        }
+        catch (InvalidArmorException ex) {
+
         }
     }
 
     /**
-     * Checks if there is an item in the equipmmnet map
+     * This method checks if validWeapon type collection contains a valid weapon, then add valid weapon to the equipment map
+     * @param weapon
+     * @throws InvalidArmorException
+     */
+
+    public void equipWeapon(Weapon weapon) {
+        try {
+            if (validWeaponType.contains(weapon.getWeaponType())) {
+                equipmentItem.put(Slot.Weapon, weapon);
+                isWeaponEquipped = true;
+            } else {
+                throw new InvalidWeaponException("Invalid weapon type" + weapon.getWeaponType());
+
+            }
+        } catch (InvalidWeaponException ex) {
+        }
+    }
+    /**
+     *
      * @return null item if there is no weapon else returns true
      */
     protected boolean hasWeaponEquipped() {
@@ -113,43 +139,48 @@ public abstract class Hero {
         return damagingAttributes;
     }
 
+    /** Calculates damaging attributes based on hero
+     * @return heroDamage
+     */
     public  int calculateDamage(){
         int weaponDamage =0;
+
         Weapon weapon = (Weapon) equipmentItem.get(Slot.Weapon);
         if(weapon != null){
             weaponDamage = weapon.getWeaponDamage();
         }
-        //calculate  damaging attributes based on hero
         int damagingAttributes =0;
-
         if(this instanceof Barbarian) {
-            damagingAttributes = getTotalAttributes().getDexterity();
+            damagingAttributes = getTotalAttributes().getStrength();
         }else if(this instanceof Wizard) {
-            damagingAttributes = getTotalAttributes().getDexterity();
+            damagingAttributes = getTotalAttributes().getIntelligence();
         }else if(this instanceof  Archer || this instanceof  SwashBuckler ){
             damagingAttributes = getTotalAttributes().getDexterity();
-
-
         }
         int heroDamage = weaponDamage* (1+ damagingAttributes / 100);
         return  heroDamage;
     }
-
     /**
      * @return total attributes
      */
     public HeroAttribute getTotalAttributes() {
-        HeroAttribute totalAttributes = new HeroAttribute(levelAttributes.getStrength(), levelAttributes.getDexterity(), levelAttributes.getIntelligence());
+        HeroAttribute totalAttributes = new HeroAttribute(
+                levelAttributes.getStrength(),
+                levelAttributes.getDexterity(),
+                levelAttributes.getIntelligence()
+        );
         for (Item item : equipmentItem.values()) {
             if (item instanceof Armor) {
                 Armor armor = (Armor) item;
                 int armorAttributes = armor.getArmorAttributes();
-                totalAttributes.add(new HeroAttribute(armorAttributes, armorAttributes, armorAttributes));
+                totalAttributes.add(new HeroAttribute(
+                        armorAttributes,
+                        armorAttributes,
+                        armorAttributes));
             }
         }
         return totalAttributes;
     }
-
     public void displayHero() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Hello name : ");
@@ -172,7 +203,5 @@ public abstract class Hero {
         System.out.println(stringBuilder.toString());
 
     }
-
-
 
 }

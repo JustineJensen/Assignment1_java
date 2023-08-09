@@ -16,10 +16,6 @@ public class SwashBuckler extends Hero {
         return super.getLevel();
     }
 
-    public void levelUp() {
-        this.setLevelUp(getLevel() + 1);
-    }
-
     @Override
     protected void levelUpAttributes() {
         levelAttributes.add(new HeroAttribute(1,4,1));

@@ -4,12 +4,16 @@ public class    Weapon extends Item {
     private WeaponType weaponType;
     private int weaponDamage;
 
-    public Weapon(String name, int requiredLevel, Slot slot, int weaponDamage) {
+    public Weapon(String name, int requiredLevel, Slot slot, int weaponDamage,WeaponType weaponType) {
         super(name, requiredLevel, slot );
         this.weaponType = weaponType;
         this.weaponDamage =weaponDamage;
     }
 
+    /**
+     *
+     * @return weaponType
+     */
 
     public WeaponType getWeaponType(){
         return  weaponType;
@@ -25,10 +29,6 @@ public class    Weapon extends Item {
     public void setWeaponDamage(int weaponDamage) {
         this.weaponDamage = weaponDamage;
     }
-
-
-
-
 
     @Override
     public String toString() {

@@ -13,13 +13,6 @@ public class Archer extends Hero {
     public String getName(){
         return super.getName();
     }
-    public int getLevel(){
-        return super.getLevel();
-    }
-
-    public void levelUp(){
-        this.setLevelUp(getLevel()+1);
-    }
 
     @Override
     public String toString() {

@@ -12,9 +12,6 @@ public class Wizard extends Hero {
     public int getLevel(){
         return super.getLevel();
     }
-    public void levelUp(){
-        this.setLevelUp(getLevel()+1);
-    }
 
     @Override
     protected void levelUpAttributes() {

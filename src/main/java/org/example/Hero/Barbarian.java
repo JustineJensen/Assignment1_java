@@ -8,19 +8,13 @@ public class Barbarian extends Hero {
         super(name);
         this.levelAttributes = new HeroAttribute(5, 2, 1);
     }
-
-    public void levelUp() {
-        this.setLevelUp(getLevel() + 1);
-    }
-
-
     public String getName() {
         return super.getName();
     }
 
-    public int getLevel() {
+    /*public int getLevel() {
         return super.getLevel();
-    }
+    }*/
 
     @Override
     public void levelUpAttributes() {

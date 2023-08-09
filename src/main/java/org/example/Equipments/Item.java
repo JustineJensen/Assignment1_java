@@ -13,7 +13,6 @@ public abstract class  Item {
         this.slot = slot;
 
     }
-
     public String getName() {
         return name;
     }
@@ -37,10 +36,6 @@ public abstract class  Item {
                 ", slot=" + slot +
                 '}';
     }
-
-
-
-
 
 }
 

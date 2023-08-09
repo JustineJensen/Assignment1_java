@@ -1,19 +1,17 @@
 package org.example.Equipments;
 
+import org.example.Hero.HeroAttribute;
+
 public class Armor extends Item {
     private ArmorType armorType;
+    private HeroAttribute heroAttribute;
     private int armorAttributes;
 
-    public Armor(String name, int requiredLevel, Slot slot, int weaponDamage,ArmorType armorType) {
+    public Armor(String name, int requiredLevel, Slot slot, ArmorType armorType, HeroAttribute heroAttribute) {
         super(name, requiredLevel, slot);
-        this.armorAttributes = armorAttributes;
         this.armorType =armorType;
+        this.heroAttribute = heroAttribute;
     }
-
-    /*public Armor(String name, int requiredLevel, Slot slot, int armorAttributes) {
-        super(name, requiredLevel, slot);
-        this.armorAttributes = armorAttributes;
-    }*/
 
     @Override
     public String getName() {
@@ -34,7 +32,17 @@ public class Armor extends Item {
     }
 
     public int  getArmorAttributes() {
-        return armorAttributes;
+        int totalAttributes = 0;
+        if (armorType == ArmorType.Cloth) {
+            totalAttributes += getRequiredLevel() * 5;
+        } else if (armorType == ArmorType.Leather) {
+            totalAttributes += getRequiredLevel() * 8;
+        } else if (armorType == ArmorType.Mail) {
+            totalAttributes += getRequiredLevel() * 10;
+        } else if (armorType == ArmorType.Plate) {
+            totalAttributes += getRequiredLevel() * 12;
+        }
+        return totalAttributes;
     }
 
     public void setArmorAttributes(int armorAttributes) {
