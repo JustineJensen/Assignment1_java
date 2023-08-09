@@ -16,6 +16,10 @@ public class SwashBuckler extends Hero {
         return super.getLevel();
     }
 
+    /**
+     * This method increases the hero's attributes by adding
+     * a fixed amount of points to their strength, dexterity, and intelligence.
+     */
     @Override
     protected void levelUpAttributes() {
         levelAttributes.add(new HeroAttribute(1,4,1));

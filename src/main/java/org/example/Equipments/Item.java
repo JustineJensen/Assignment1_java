@@ -17,10 +17,18 @@ public abstract class  Item {
         return name;
     }
 
+    /**
+     *
+     * @return required level
+     */
     public int getRequiredLevel() {
         return requiredLevel;
     }
 
+    /**
+     *
+     * @return slot
+     */
     public Slot getSlot() {
         return slot;
     }

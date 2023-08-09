@@ -161,6 +161,7 @@ public abstract class Hero {
         return  heroDamage;
     }
     /**
+     * This method calculates and returns the total attributes of a hero
      * @return total attributes
      */
     public HeroAttribute getTotalAttributes() {
@@ -181,6 +182,10 @@ public abstract class Hero {
         }
         return totalAttributes;
     }
+
+    /**
+     * Prints out hero information
+     */
     public void displayHero() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Hello name : ");

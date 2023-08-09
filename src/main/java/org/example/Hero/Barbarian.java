@@ -11,11 +11,13 @@ public class Barbarian extends Hero {
     public String getName() {
         return super.getName();
     }
-
-    /*public int getLevel() {
+    public int getLevel(){
         return super.getLevel();
-    }*/
-
+    }
+    /**
+     * This method increases the hero's attributes by adding
+     * a fixed amount of points to their strength, dexterity, and intelligence.
+     */
     @Override
     public void levelUpAttributes() {
         levelAttributes.add(new HeroAttribute(3,2,1));

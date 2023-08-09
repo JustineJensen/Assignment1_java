@@ -31,6 +31,11 @@ public class Armor extends Item {
         return armorType;
     }
 
+    /**
+     * increases the Armor attributes by adding
+     * a fixed amount of points to their strength, dexterity, and intelligence
+     * @return total attributes
+     */
     public int  getArmorAttributes() {
         int totalAttributes = 0;
         if (armorType == ArmorType.Cloth) {
